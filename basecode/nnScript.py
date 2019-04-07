@@ -197,20 +197,15 @@ def nnObjFunction(params, *args):
     obj_val = 0
 
     # Your code here
-    N = training_label.shape[0]
+    y = np.zeros((training_label.shape[0], n_class))
+    y[np.arange(training_label.shape[0], dtype = "int"), training_label.astype(int)] = 1
 
-    y = np.zeros((N, n_class))
-    y[np.arange(N, dtype = "int"), training_label.astype(int)] = 1
+    training_data = np.column_stack((np.array(training_data), np.array(np.ones(training_label.shape[0]))))
 
-    training_data = np.column_stack((np.array(training_data), np.array(np.ones(N))))
-
-    z = np.dot(training_data, w1.T)
-    Z = sigmoid(z)
-    K = Z.shape[0]
-    Z = np.column_stack((Z, np.ones(K)))
-    o = np.dot(Z, w2.T)
-    O = sigmoid(o)
-
+    K = (sigmoid(np.dot(training_data, w1.T))).shape[0]
+    Z = np.column_stack((sigmoid(np.dot(training_data, w1.T)), np.ones((sigmoid(np.dot(training_data, w1.T))).shape[0])))
+    O = sigmoid(np.dot(Z, w2.T))
+    
     # deltaL = Ol - Yl
     error_obtained = O - y
 
@@ -224,7 +219,7 @@ def nnObjFunction(params, *args):
     gradient_w2 = np.dot(error_obtained.T, Z)
 
     obj_val = (np.sum(-1 * (y * np.log(O) + (1 - y) * np.log(1 - O)))) / training_data.shape[0] + ((lambdaval / (2 * training_data.shape[0])) * (np.sum(np.square(w1)) + np.sum(np.square(w2))))
-
+    
     # Make sure you reshape the gradient matrices to a 1D array. for instance if your gradient matrices are grad_w1 and grad_w2
     # you would use code similar to the one below to create a flat array
 
@@ -234,12 +229,8 @@ def nnObjFunction(params, *args):
     obj_grad = np.array([])
     obj_grad = np.concatenate((gradient_w1.flatten(), gradient_w2.flatten()), 0)
 
-
     # print(obj_val)
     # print(obj_grad)
-
-    # global print_obj_val
-    # print_obj_val = obj_val
 
     return (obj_val, obj_grad)
 
