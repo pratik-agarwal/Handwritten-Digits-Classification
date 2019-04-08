@@ -42,7 +42,7 @@ def create_multilayer_perceptron():
         'b1': tf.Variable(tf.random_normal([n_hidden_1])),
         'b2': tf.Variable(tf.random_normal([n_hidden_2])),
 
-        #Added for b3 to b7
+        # Added for b3 to b7
 
         'b3': tf.Variable(tf.random_normal([n_hidden_3])),
         'b4': tf.Variable(tf.random_normal([n_hidden_4])),
@@ -64,7 +64,7 @@ def create_multilayer_perceptron():
     layer_2 = tf.add(tf.matmul(layer_1, weights['h2']), biases['b2'])
     layer_2 = tf.nn.relu(layer_2)
 
-    
+    # Added for layer 3 through 7
 
     layer_3 = tf.add(tf.matmul(layer_1, weights['h3']), biases['b3'])
     layer_3 = tf.nn.relu(layer_3)
@@ -126,7 +126,7 @@ train_features, train_labels, valid_features, valid_labels, test_features, test_
 # Launch the graph
 
 print('Testing with 7 layers:')
-timer = time.time()
+prevTime = time.time()
 
 with tf.Session() as sess:
     sess.run(init)
@@ -146,5 +146,5 @@ with tf.Session() as sess:
     correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
     print("Accuracy:", accuracy.eval({x: test_features, y: test_labels}))
-    newTime = time.time() - timer
-    print('Completion Time: '+str(newTime))
+    currTime = time.time() - prevTime
+    print('Completion Time: '+str(currTime))
