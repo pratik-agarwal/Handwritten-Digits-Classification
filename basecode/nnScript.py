@@ -68,7 +68,6 @@ def preprocess():
 
     # Pick a reasonable size for validation data
 
-    #Initialize:
     
     train_size = 50000
     feature_size = 784
@@ -93,18 +92,18 @@ def preprocess():
         length = len(data)
         if "train" in i:
             adjust = length - reduceBy
-            # ---------------------adding data to training set-------------------------#
+            
             preprocess_train,len_train,train_label,len_train_label = data_add(preprocess_train,len_train,adjust,data[np.random.permutation(range(length))[1000:], :],i,preprocess_train_label,len_train_label)
 
-            # ---------------------adding data to validation set-------------------------#
+            
             preprocess_validation,len_validation,preprocess_validation_label,len_validation_label = data_add(preprocess_validation,len_validation,1000,data[np.random.permutation(range(length))[0:1000],:],i,preprocess_validation_label,len_validation_label)
 
-            # ---------------------adding data to test set-------------------------#
+            
         elif "test" in i:
             preprocess_test_label[len_test:len_test + length] = i[len(i) - 1]
             preprocess_test[len_test:len_test + length] = data[np.random.permutation(range(length))]
             len_test += length
-            # ---------------------Shuffle,double and normalize-------------------------#
+
             
     train_size = range(preprocess_train.shape[0])
     train_data,train_label = dsn(train_size,preprocess_train,preprocess_train_label)
@@ -299,7 +298,7 @@ initialWeights = np.concatenate((initial_w1.flatten(), initial_w2.flatten()), 0)
 
 # set the regularization hyper-parameter
 # Setting the optimal value achieved by running the code as mentioned in the report which is 5
-lambdaval = 5
+lambdaval = 5 # Change for getting the variation in graphs <--- need to tweak
 
 args = (n_input, n_hidden, n_class, train_data, train_label, lambdaval)
 
