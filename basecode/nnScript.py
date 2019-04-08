@@ -290,17 +290,6 @@ n_hidden = 50
 # set the number of nodes in output unit
 n_class = 10
 
-'''
-Looping to generate csv for tables
-
-arr = [0, 5, 10, 15]
-# arr = [50, ]
-# arr2 = [4, 8, 12, 16, 20, 24, 28, 32]
-file = open('test_1.csv', 'a') 
-for i in range(4):
-    lambdaval = arr[i]
-'''
-
 # initialize the weights into some random matrices
 initial_w1 = initializeWeights(n_input, n_hidden)
 initial_w2 = initializeWeights(n_hidden, n_class)
