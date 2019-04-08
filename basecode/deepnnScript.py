@@ -15,11 +15,11 @@ def create_multilayer_perceptron():
     # Network Parameters
     n_hidden_1 = 256  # 1st layer number of features
     n_hidden_2 = 256  # 2nd layer number of features
-    n_hidden_3 = 256
-    n_hidden_4 = 256
-    n_hidden_5 = 256
-    n_hidden_6 = 256
-    n_hidden_7 = 256
+    n_hidden_3 = 256  # 3rd layer number of features
+    n_hidden_4 = 256  # 4th layer number of features
+    n_hidden_5 = 256  # 5th layer number of features
+    n_hidden_6 = 256  # 6th layer number of features
+    n_hidden_7 = 256  # 7th layer number of features
     n_input = 2376  # data input
     n_classes = 2
 
@@ -36,7 +36,7 @@ def create_multilayer_perceptron():
         'h6': tf.Variable(tf.random_normal([n_hidden_5, n_hidden_6])),
         'h7': tf.Variable(tf.random_normal([n_hidden_6, n_hidden_7])),
 
-        'out': tf.Variable(tf.random_normal([n_hidden_2, n_classes]))
+        'out': tf.Variable(tf.random_normal([n_hidden_7, n_classes]))
     }
     biases = {
         'b1': tf.Variable(tf.random_normal([n_hidden_1])),
@@ -63,6 +63,8 @@ def create_multilayer_perceptron():
     # Hidden layer with RELU activation
     layer_2 = tf.add(tf.matmul(layer_1, weights['h2']), biases['b2'])
     layer_2 = tf.nn.relu(layer_2)
+
+    
 
     layer_3 = tf.add(tf.matmul(layer_1, weights['h3']), biases['b3'])
     layer_3 = tf.nn.relu(layer_3)
