@@ -1,4 +1,5 @@
 # matplotlib inline
+
 import matplotlib.pyplot as plt
 import tensorflow as tf
 import numpy as np
@@ -417,10 +418,3 @@ print_test_accuracy(show_example_errors=False)
 optimize(num_iterations=9000)
 print_test_accuracy(show_example_errors=False)
 session.close()
-
-
-
-
-
-
-
