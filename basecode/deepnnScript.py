@@ -5,7 +5,6 @@ Comparing single layer MLP with deep MLP (using TensorFlow)
 import tensorflow as tf
 import numpy as np
 import pickle
-import time
 
 
 # Create model
@@ -15,6 +14,7 @@ def create_multilayer_perceptron():
     # Network Parameters
     n_hidden_1 = 256  # 1st layer number of features
     n_hidden_2 = 256  # 2nd layer number of features
+
     n_hidden_3 = 256  # 3rd layer number of features
     n_hidden_4 = 256  # 4th layer number of features
     n_hidden_5 = 256  # 5th layer number of features
@@ -79,6 +79,7 @@ def create_multilayer_perceptron():
 
     # Output layer with linear activation
     out_layer = tf.matmul(layer_7, weights['out']) + biases['out']
+
     return out_layer,x,y
 
 # Do not change this
@@ -124,10 +125,7 @@ init = tf.global_variables_initializer()
 # load data
 train_features, train_labels, valid_features, valid_labels, test_features, test_labels = preprocess()
 # Launch the graph
-
-print('Testing with 7 layers:')
-prevTime = time.time()
-
+# prevTime = time.time()
 with tf.Session() as sess:
     sess.run(init)
 
@@ -145,6 +143,6 @@ with tf.Session() as sess:
     print("Optimization Finished!")
     correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+    # currTime = time.time() - prevTime
     print("Accuracy:", accuracy.eval({x: test_features, y: test_labels}))
-    currTime = time.time() - prevTime
-    print('Completion Time: '+str(currTime))
+    # print('Completion Time: '+str(currTime))

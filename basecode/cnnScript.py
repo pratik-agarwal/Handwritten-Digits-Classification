@@ -1,5 +1,4 @@
 # matplotlib inline
-
 import matplotlib.pyplot as plt
 import tensorflow as tf
 import numpy as np
@@ -18,7 +17,7 @@ filter_size2 = 5          # Convolution filters are 5 x 5 pixels.
 num_filters2 = 36         # There are 36 of these filters.
 
 # Fully-connected layer.
-fc_size = 128        
+fc_size = 128
 
 from tensorflow.examples.tutorials.mnist import input_data
 data = input_data.read_data_sets('data/MNIST/', one_hot=True)
@@ -118,7 +117,7 @@ def flatten_layer(layer):
     # The number of features is: img_height * img_width * num_channels
     # We can use a function from TensorFlow to calculate this.
     num_features = layer_shape[1:4].num_elements()
-    
+
     # Reshape the layer to [num_images, num_features].
     # Note that we just set the size of the second dimension
     # to num_features and the size of the first dimension to -1
@@ -258,7 +257,7 @@ test_batch_size = 256
 
 def plot_images(images, cls_true, cls_pred=None):
     assert len(images) == len(cls_true) == 9
-    
+
     # Create figure with 3x3 sub-plots.
     fig, axes = plt.subplots(3, 3)
     fig.subplots_adjust(hspace=0.3, wspace=0.3)
@@ -275,11 +274,11 @@ def plot_images(images, cls_true, cls_pred=None):
 
         # Show the classes as the label on the x-axis.
         ax.set_xlabel(xlabel)
-        
+
         # Remove ticks from the plot.
         ax.set_xticks([])
         ax.set_yticks([])
-    
+
     # Ensure the plot is shown correctly with multiple plots
     # in a single Notebook cell.
     plt.show()
@@ -295,22 +294,22 @@ def plot_example_errors(cls_pred, correct):
 
     # Negate the boolean array.
     incorrect = (correct == False)
-    
+
     # Get the images from the test-set that have been
     # incorrectly classified.
     images = data.test.images[incorrect]
-    
+
     # Get the predicted classes for those images.
     cls_pred = cls_pred[incorrect]
 
     # Get the true classes for those images.
     cls_true = data.test.cls[incorrect]
-    
+
     # Plot the first 9 images.
     plot_images(images=images[0:9],
                 cls_true=cls_true[0:9],
                 cls_pred=cls_pred[0:9])
-    
+
 def plot_confusion_matrix(cls_pred):
     # This is called from print_test_accuracy() below.
 
@@ -319,7 +318,7 @@ def plot_confusion_matrix(cls_pred):
 
     # Get the true classifications for the test-set.
     cls_true = data.test.cls
-    
+
     # Get the confusion matrix using sklearn.
     cm = confusion_matrix(y_true=cls_true,
                           y_pred=cls_pred)
